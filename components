@@ -1,0 +1,10 @@
+header:
+
+<div class="header">
+  <div class="game-info"></div>
+  <div class="logo-container">
+    <img src="../assets/images/logo.png" />
+    <h1>oardie</h1>
+  </div>
+  <img onclick="toggleMute()" class="mute-img" src="" />
+</div>

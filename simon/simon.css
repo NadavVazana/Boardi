@@ -1,0 +1,122 @@
+html {
+  background-color: white !important;
+  overflow: hidden;
+}
+
+.simon {
+  height: 100vh;
+  position: relative;
+}
+
+.black-screen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.425);
+  z-index: 10;
+}
+
+.trans-screen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.start-btn {
+  position: absolute;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-family: Tekur-Bold;
+  font-size: 21px;
+  user-select: none;
+}
+
+.you-lost {
+  color: white;
+  font-size: 40px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.record {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.lost button {
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 20px;
+  font-family: Tekur-Bold;
+  font-size: 21px;
+}
+
+.lost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  user-select: none;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.simon-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.full-opacity {
+  opacity: 1 !important;
+  transition: opacity 0.3s;
+}
+
+.yellow,
+.red,
+.blue,
+.green {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.yellow {
+  background-color: rgb(224, 224, 0);
+}
+
+.yellow:hover {
+  opacity: 0.7;
+}
+
+.red {
+  background-color: red;
+}
+
+.red:hover {
+  opacity: 0.7;
+}
+
+.green {
+  background-color: green;
+}
+
+.green:hover {
+  opacity: 0.7;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.blue:hover {
+  opacity: 0.7;
+}
