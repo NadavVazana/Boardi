@@ -1,5 +1,6 @@
 html {
   background-color: white !important;
+  overflow: hidden;
 }
 
 .simon {
