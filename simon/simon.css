@@ -3,14 +3,20 @@ html {
   overflow: hidden;
 }
 
+body {
+  margin: 0;
+}
+
 .simon {
-  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
   position: relative;
 }
 
 .black-screen {
   position: absolute;
-  height: 100%;
+  height: calc(100dvh - 50px);
   width: 100%;
   background-color: rgba(0, 0, 0, 0.425);
   z-index: 10;
@@ -69,6 +75,10 @@ html {
   transform: translate(-50%, -50%);
 }
 
+.simon-game {
+  flex: 1;
+}
+
 .simon-container {
   height: 100%;
   display: grid;
@@ -94,30 +104,23 @@ html {
   background-color: rgb(224, 224, 0);
 }
 
-.yellow:hover {
-  opacity: 0.7;
+.yellow:hover,
+.red:hover,
+.green:hover,
+.blue:hover {
+  @media (min-width: 1024px) {
+    opacity: 0.7;
+  }
 }
 
 .red {
   background-color: red;
 }
 
-.red:hover {
-  opacity: 0.7;
-}
-
 .green {
   background-color: green;
 }
 
-.green:hover {
-  opacity: 0.7;
-}
-
 .blue {
   background-color: blue;
-}
-
-.blue:hover {
-  opacity: 0.7;
 }
