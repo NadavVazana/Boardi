@@ -77,6 +77,7 @@ function getColorEL(color) {
 }
 
 function playSound(method) {
+  console.log(JSON.parse(localStorage.getItem("isMute")));
   if (JSON.parse(localStorage.getItem("isMute"))) return;
   var audio = new Audio(`../assets/audio/simon/${method}.mp3`);
   audio.play();
