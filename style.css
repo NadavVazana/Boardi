@@ -24,6 +24,10 @@
   flex-grow: 1;
 }
 
+button {
+  color: black;
+}
+
 .header .logo-container {
   left: 50%;
   top: 50%;
