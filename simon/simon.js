@@ -39,7 +39,7 @@ function startGame() {
   lostEL.hidden = true;
   setTimeout(() => {
     chooseColor();
-  }, 1000);
+  }, 1500);
 }
 
 function updateScore() {

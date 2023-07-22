@@ -1,10 +1,9 @@
 html {
   background-color: white !important;
-  overflow: hidden;
 }
 
 .simon {
-  height: 100vh;
+  height: calc(100vh - 50px);
   position: relative;
 }
 
