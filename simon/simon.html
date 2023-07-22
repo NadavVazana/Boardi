@@ -22,20 +22,22 @@
         </div>
         <img onclick="toggleMute()" class="mute-img" src="" />
       </div>
-      <div class="black-screen">
-        <button onclick="startGame()" class="start-btn">Start!</button>
-      </div>
-      <div class="trans-screen"></div>
-      <div hidden class="lost">
-        <p class="you-lost">You Lost!</p>
-        <p class="record"></p>
-        <button onclick="startGame()">Play Again</button>
-      </div>
-      <div class="simon-container">
-        <div onclick="onClickColor('yellow')" class="yellow"></div>
-        <div onclick="onClickColor('blue')" class="blue"></div>
-        <div onclick="onClickColor('green')" class="green"></div>
-        <div onclick="onClickColor('red')" class="red"></div>
+      <div class="simon-game">
+        <div class="black-screen">
+          <button onclick="startGame()" class="start-btn">Start!</button>
+        </div>
+        <div class="trans-screen"></div>
+        <div hidden class="lost">
+          <p class="you-lost">You Lost!</p>
+          <p class="record"></p>
+          <button onclick="startGame()">Play Again</button>
+        </div>
+        <div class="simon-container">
+          <div onclick="onClickColor('yellow')" class="yellow"></div>
+          <div onclick="onClickColor('blue')" class="blue"></div>
+          <div onclick="onClickColor('green')" class="green"></div>
+          <div onclick="onClickColor('red')" class="red"></div>
+        </div>
       </div>
     </section>
   </body>
