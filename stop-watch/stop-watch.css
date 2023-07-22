@@ -1,0 +1,61 @@
+.stop-watch-game {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 51px);
+}
+
+.player-1,
+.player-2 {
+  flex-grow: 1;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-1 {
+  border-top: 3px solid black;
+  transform: rotate(180deg);
+}
+
+.player-2 {
+  padding-top: 5px;
+}
+
+.p1-mill,
+.p2-mill {
+  width: 100px;
+}
+
+.p2-sec,
+.p1-sec,
+.p1-mill,
+.p2-mill {
+  font-size: 100px;
+  padding-top: 10px;
+  pointer-events: none;
+}
+
+.black-screen {
+  background-color: rgba(0, 0, 0, 0.425);
+  position: absolute;
+  height: 100%;
+  z-index: 10;
+  width: 100%;
+}
+
+.start-btn,
+.play-again {
+  position: absolute;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-family: Tekur-Bold;
+  font-size: 21px;
+  user-select: none;
+}
