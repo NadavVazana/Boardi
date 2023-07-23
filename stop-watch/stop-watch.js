@@ -35,6 +35,8 @@ window.addEventListener("keydown", (ev) => {
 });
 
 function startGame() {
+  restartInit();
+  closeInfo();
   p1Sec = 5;
   p2Sec = 5;
   p1millSec = 0;
