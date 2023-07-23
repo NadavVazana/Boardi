@@ -40,6 +40,7 @@ window.addEventListener("keydown", (ev) => {
 
 // function that resets the timers and starts the game
 function startGame() {
+  playSound("start");
   p1Sec = 5;
   p2Sec = 5;
   p1millSec = 0;
@@ -127,6 +128,7 @@ function stopTimer(playerNum) {
 // function that checks who won and presents on screen
 function checkWin() {
   if (p1Sec === -5 && p2Sec === -5) {
+    playSound("lost");
     player1.style.backgroundColor = "red";
     player2.style.backgroundColor = "red";
     showEndScreen();
@@ -149,11 +151,13 @@ function checkWin() {
     winner = "player-1";
     loser = "player-2";
   } else {
+    playSound("tie");
     player1.style.backgroundColor = "#ACBCFF";
     player2.style.backgroundColor = "#ACBCFF";
     showEndScreen();
     return;
   }
+  playSound("win");
   showEndScreen();
   document.querySelector(`.${winner}`).style.backgroundColor = "green";
   document.querySelector(`.${loser}`).style.backgroundColor = "red";
@@ -199,4 +203,11 @@ function blackScreenClick() {
   blackScreenEL.style.cursor = "unset";
   infoEL.hidden = true;
   isInfoUp = false;
+}
+
+// function that plays an selected sound unless the sound is muted
+function playSound(method) {
+  if (JSON.parse(localStorage.getItem("isMute"))) return;
+  var audio = new Audio(`../assets/audio/stop-watch/${method}.mp3`);
+  audio.play();
 }
