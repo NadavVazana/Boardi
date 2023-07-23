@@ -1,6 +1,5 @@
 html {
   background-color: white !important;
-  overflow: hidden;
 }
 
 body {
@@ -16,51 +15,79 @@ body {
 
 .black-screen {
   position: absolute;
-  height: calc(100dvh - 50px);
   width: 100%;
   background-color: rgba(0, 0, 0, 0.425);
   z-index: 10;
+  height: calc(100dvh - 51px);
+  @media (min-width: 500px) {
+    height: calc(100dvh - 71px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100dvh - 51px);
+  }
 }
 
 .trans-screen {
   position: absolute;
-  height: 100%;
   width: 100%;
   z-index: 5;
+  height: calc(100dvh - 51px);
+  @media (min-width: 500px) {
+    height: calc(100dvh - 71px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100dvh - 51px);
+  }
 }
 
 .start-btn {
   position: absolute;
-  padding: 20px;
-  border-radius: 20px;
-  cursor: pointer;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
-  font-family: Tekur-Bold;
-  font-size: 21px;
-  user-select: none;
 }
 
-.you-lost {
-  color: white;
-  font-size: 40px;
-  margin-bottom: 10px;
-  white-space: nowrap;
-}
-
-.record {
-  margin-bottom: 10px;
-  color: white;
-}
-
+.start-btn,
 .lost button {
   border-radius: 20px;
   cursor: pointer;
   padding: 20px;
   font-family: Tekur-Bold;
-  font-size: 21px;
+  user-select: none;
+  z-index: 100;
+  font-size: 25px;
+  @media (min-width: 500px) {
+    font-size: 40px;
+  }
+}
+
+.game-info {
+  font-size: 18px;
+  @media (min-width: 500px) {
+    font-size: 25px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 22px;
+  }
+}
+
+.you-lost {
+  color: white;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  font-size: 40px;
+  @media (min-width: 500px) {
+    font-size: 60px;
+  }
+}
+
+.record {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 20px;
+  @media (min-width: 500px) {
+    font-size: 30px;
+  }
 }
 
 .lost {
