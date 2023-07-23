@@ -108,6 +108,7 @@
 
 .game-info {
   margin-top: 3px;
+  cursor: pointer;
   width: 30px !important;
   @media (min-width: 500px) {
     width: 45px !important;

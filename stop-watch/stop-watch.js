@@ -15,6 +15,7 @@ var player1 = document.querySelector(".player-1");
 var player2 = document.querySelector(".player-2");
 var playAgainEL = document.querySelector(".play-again");
 var isInfoUp = false;
+var isRestart = true;
 var infoEL = document.querySelector(".info-card");
 var startBtnEL = document.querySelector(".start-btn");
 
@@ -38,9 +39,27 @@ window.addEventListener("keydown", (ev) => {
   }
 });
 
+// function that restarts the game if the key R is pressed
+window.addEventListener("keydown", (ev) => {
+  if (ev.code === "KeyR" && isRestart) {
+    stopGame();
+    startGame();
+  }
+});
+
+// function that prevents the game from restarting multiple times in a row
+function restartInit() {
+  isRestart = false;
+  setTimeout(() => {
+    isRestart = true;
+  }, 2000);
+}
+
 // function that resets the timers and starts the game
 function startGame() {
+  restartInit();
   playSound("start");
+  closeInfo();
   p1Sec = 5;
   p2Sec = 5;
   p1millSec = 0;
@@ -189,10 +208,15 @@ function onInfoClick() {
     });
     stopGame();
   } else {
-    blackScreenEL.style.cursor = "unset";
-    infoEL.hidden = true;
-    isInfoUp = false;
+    closeInfo();
   }
+}
+
+// function that closes the info card
+function closeInfo() {
+  blackScreenEL.style.cursor = "unset";
+  infoEL.hidden = true;
+  isInfoUp = false;
 }
 
 // function that closes info-card on black screen click
@@ -200,9 +224,7 @@ function blackScreenClick() {
   if (!isInfoUp) {
     return;
   }
-  blackScreenEL.style.cursor = "unset";
-  infoEL.hidden = true;
-  isInfoUp = false;
+  closeInfo();
 }
 
 // function that plays an selected sound unless the sound is muted
