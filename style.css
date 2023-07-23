@@ -16,6 +16,12 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
+  @media (min-width: 500px) {
+    height: 70px;
+  }
+  @media (min-width: 1024px) {
+    height: 50px;
+  }
   background-color: rgb(183, 153, 255);
   border-bottom: 1px solid rgba(140, 91, 253, 0.558);
 }
@@ -37,16 +43,35 @@ button {
   cursor: pointer;
   display: flex;
   align-items: center;
+  font-size: 25px;
+  @media (min-width: 500px) {
+    font-size: 35px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 30px;
+  }
 }
 
-.header img {
+.header .mute-img {
   cursor: pointer;
-  width: 20px;
+  width: 30px;
+  @media (min-width: 500px) {
+    width: 40px;
+  }
+  @media (min-width: 1024px) {
+    width: 30px;
+  }
 }
 
 .header .logo-container img {
-  width: 25px;
   margin: 2px;
+  width: 25px;
+  @media (min-width: 500px) {
+    width: 35px;
+  }
+  @media (min-width: 1024px) {
+    width: 25px;
+  }
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -90,6 +115,7 @@ h4,
 h5,
 h6,
 p {
+  font-size: unset;
   margin: 0;
 }
 
@@ -97,10 +123,6 @@ p {
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
-
-h1 {
-  font-size: 2em;
-}
 
 /* Grouping content
    ========================================================================== */

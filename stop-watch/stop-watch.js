@@ -14,12 +14,17 @@ var isP2Stop = false;
 var player1 = document.querySelector(".player-1");
 var player2 = document.querySelector(".player-2");
 var playAgainEL = document.querySelector(".play-again");
+var isInfoUp = false;
+var isRestart = true;
+var infoEL = document.querySelector(".info-card");
+var startBtnEL = document.querySelector(".start-btn");
 
 // multiple touch support
 player1.addEventListener("touchend", (ev) => {
   stopTimer(1);
 });
 
+// multiple touch support
 player2.addEventListener("touchend", (ev) => {
   stopTimer(2);
 });
@@ -34,6 +39,23 @@ window.addEventListener("keydown", (ev) => {
   }
 });
 
+// function that restarts the game if the key R is pressed
+window.addEventListener("keydown", (ev) => {
+  if (ev.code === "KeyR" && isRestart) {
+    stopGame();
+    startGame();
+  }
+});
+
+// function that prevents the game from restarting multiple times in a row
+function restartInit() {
+  isRestart = false;
+  setTimeout(() => {
+    isRestart = true;
+  }, 2000);
+}
+
+// function that resets the timers and starts the game
 function startGame() {
   restartInit();
   closeInfo();
@@ -45,13 +67,13 @@ function startGame() {
   player2.style.backgroundColor = "transparent";
   isP1Stop = false;
   isP2Stop = false;
-  var startBtnEL = document.querySelector(".start-btn");
   blackScreenEL.hidden = true;
   startBtnEL.hidden = true;
   startP1Timer();
   startP2Timer();
 }
 
+// function that runs the timer of player1 and stops at -5
 function startP1Timer() {
   p1Interval = setInterval(() => {
     if (p1millSec === 0) {
@@ -75,6 +97,7 @@ function startP1Timer() {
   }, 10);
 }
 
+// function that runs the timer of player2 and stops at -5
 function startP2Timer() {
   p2Interval = setInterval(() => {
     if (p2millSec === 0) {
@@ -98,6 +121,7 @@ function startP2Timer() {
   }, 10);
 }
 
+// function that updates the innerHTML of the timers
 function updateTime() {
   p1SecEL.innerHTML = `${p1Sec}:`;
   p2SecEL.innerHTML = `${p2Sec}:`;
@@ -105,6 +129,7 @@ function updateTime() {
   p2MillEL.innerHTML = p2millSec < 10 ? `0${p2millSec}` : p2millSec;
 }
 
+// function that stops the timer on given player and checks winner if both players stoped
 function stopTimer(playerNum) {
   playerNum === 1 ? clearInterval(p1Interval) : clearInterval(p2Interval);
   if (playerNum === 1) {
@@ -118,12 +143,13 @@ function stopTimer(playerNum) {
   }
 }
 
+// function that checks who won and presents on screen
 function checkWin() {
   if (p1Sec === -5 && p2Sec === -5) {
-    document.querySelector(".player-1").style.backgroundColor = "red";
-    document.querySelector(".player-2").style.backgroundColor = "red";
-    playAgainEL.hidden = false;
-    blackScreenEL.hidden = false;
+    playSound("lost");
+    player1.style.backgroundColor = "red";
+    player2.style.backgroundColor = "red";
+    showEndScreen();
     return;
   }
   var winner = "";
@@ -143,14 +169,66 @@ function checkWin() {
     winner = "player-1";
     loser = "player-2";
   } else {
-    document.querySelector(".player-1").style.backgroundColor = "#ACBCFF";
-    document.querySelector(".player-2").style.backgroundColor = "#ACBCFF";
-    playAgainEL.hidden = false;
-    blackScreenEL.hidden = false;
+    playSound("tie");
+    player1.style.backgroundColor = "#ACBCFF";
+    player2.style.backgroundColor = "#ACBCFF";
+    showEndScreen();
     return;
   }
-  blackScreenEL.hidden = false;
-  playAgainEL.hidden = false;
+  playSound("win");
+  showEndScreen();
   document.querySelector(`.${winner}`).style.backgroundColor = "green";
   document.querySelector(`.${loser}`).style.backgroundColor = "red";
+}
+
+// function that revealse black screen and play again button
+function showEndScreen() {
+  blackScreenEL.hidden = false;
+  if (startBtnEL.hidden) {
+    playAgainEL.hidden = false;
+  }
+}
+
+// function that stops the game
+function stopGame() {
+  clearInterval(p1Interval);
+  clearInterval(p2Interval);
+  showEndScreen();
+}
+
+// function that reveals the info card on info-img click
+function onInfoClick() {
+  if (!isInfoUp) {
+    infoEL.hidden = false;
+    isInfoUp = true;
+    blackScreenEL.style.cursor = "pointer";
+    infoEL.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+    stopGame();
+  } else {
+    closeInfo();
+  }
+}
+
+// function that closes the info card
+function closeInfo() {
+  blackScreenEL.style.cursor = "unset";
+  infoEL.hidden = true;
+  isInfoUp = false;
+}
+
+// function that closes info-card on black screen click
+function blackScreenClick() {
+  if (!isInfoUp) {
+    return;
+  }
+  closeInfo();
+}
+
+// function that plays an selected sound unless the sound is muted
+function playSound(method) {
+  if (JSON.parse(localStorage.getItem("isMute"))) return;
+  var audio = new Audio(`../assets/audio/stop-watch/${method}.mp3`);
+  audio.play();
 }

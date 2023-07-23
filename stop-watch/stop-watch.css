@@ -3,6 +3,12 @@
   display: flex;
   flex-direction: column;
   height: calc(100dvh - 51px);
+  @media (min-width: 500px) {
+    height: calc(100dvh - 71px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100dvh - 51px);
+  }
 }
 
 .player-1,
@@ -48,7 +54,6 @@
 .start-btn,
 .play-again {
   position: absolute;
-  padding: 20px;
   border-radius: 20px;
   cursor: pointer;
   top: 50%;
@@ -56,6 +61,73 @@
   transform: translate(-50%, -50%);
   z-index: 100;
   font-family: Tekur-Bold;
-  font-size: 21px;
   user-select: none;
+  padding: 20px;
+  font-size: 21px;
+  @media (min-width: 500px) {
+    padding: 30px;
+    font-size: 45px;
+  }
+  @media (min-width: 1024px) {
+    padding: 20px;
+    font-size: 30px;
+  }
+}
+
+.info-card {
+  position: absolute;
+  width: 300px;
+  height: 250px;
+  font-size: 21px;
+  background-color: rgb(183, 153, 255);
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  font-family: Tekur;
+  user-select: none;
+  padding: 20px;
+  text-align: center;
+  line-height: 1.5;
+  @media (min-width: 500px) {
+    width: 500px;
+    height: 500px;
+    font-size: 37px;
+  }
+  @media (min-width: 1024px) {
+    width: 400px;
+    height: 330px;
+    font-size: 28px;
+  }
+}
+
+.info-card:hover {
+  cursor: default;
+}
+
+.game-info {
+  margin-top: 3px;
+  cursor: pointer;
+  width: 30px !important;
+  @media (min-width: 500px) {
+    width: 45px !important;
+  }
+  @media (min-width: 1024px) {
+    width: 35px !important;
+  }
+}
+
+.info-title {
+  font-family: Tekur-bold;
+  margin-bottom: 10px;
+  font-size: 30px;
+  @media (min-width: 500px) {
+    margin-bottom: 10px;
+    font-size: 60px;
+  }
+  @media (min-width: 1024px) {
+    margin-bottom: 10px;
+    font-size: 40px;
+  }
 }
