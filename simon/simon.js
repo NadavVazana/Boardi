@@ -6,7 +6,7 @@ var blackScreenEL = document.querySelector(".black-screen");
 var transScreenEL = document.querySelector(".trans-screen");
 var lostEL = document.querySelector(".lost");
 var record;
-var scoreEL = document.querySelector(".game-info");
+var scoreEL = document.querySelector(".game-score");
 updateScore();
 
 // function that restarts the game if the key R is pressed
