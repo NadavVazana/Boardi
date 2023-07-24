@@ -18,8 +18,34 @@
     />
   </head>
   <body onload="onAppLoad()">
-    <button onclick="moveTo('simon')">Simon Says</button>
-    <button onclick="moveTo('stop-watch')">stop-watch</button>
+    <div class="header">
+      <div>
+        <img
+          class="game-info"
+          src="./assets/images/info.svg"
+        />
+      </div>
+      <div class="logo-container" style="cursor: default;">
+        <img src="../assets/images/logo.png" />
+        <h1>oardie</h1>
+      </div>
+      <img onclick="toggleMute()" class="mute-img" src="" />
+    </div>
+    </div>
+    <div class="games-container">
+      <div onclick="moveTo('simon')" class="game-div">
+        <p class="game-title">Simon Says</p>
+        <img class="game-img" src="./assets/images/Simon.svg" />
+      </div>
+      <div class="game-div">
+        <p class="game-title">Stop-watch</p>
+        <img
+          class="game-img"
+          onclick="moveTo('stop-watch')"
+          src="./assets/images/timer.svg"
+        />
+      </div>
+    </div>
   </body>
 </html>
 

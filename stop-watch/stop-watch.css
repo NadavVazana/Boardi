@@ -43,14 +43,6 @@
   pointer-events: none;
 }
 
-.black-screen {
-  background-color: rgba(0, 0, 0, 0.425);
-  position: absolute;
-  height: 100%;
-  z-index: 10;
-  width: 100%;
-}
-
 .start-btn,
 .play-again {
   position: absolute;
@@ -71,63 +63,5 @@
   @media (min-width: 1024px) {
     padding: 20px;
     font-size: 30px;
-  }
-}
-
-.info-card {
-  position: absolute;
-  width: 300px;
-  height: 250px;
-  font-size: 21px;
-  background-color: rgb(183, 153, 255);
-  border-radius: 20px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 200;
-  font-family: Tekur;
-  user-select: none;
-  padding: 20px;
-  text-align: center;
-  line-height: 1.5;
-  @media (min-width: 500px) {
-    width: 500px;
-    height: 500px;
-    font-size: 37px;
-  }
-  @media (min-width: 1024px) {
-    width: 400px;
-    height: 330px;
-    font-size: 28px;
-  }
-}
-
-.info-card:hover {
-  cursor: default;
-}
-
-.game-info {
-  margin-top: 3px;
-  cursor: pointer;
-  width: 30px !important;
-  @media (min-width: 500px) {
-    width: 45px !important;
-  }
-  @media (min-width: 1024px) {
-    width: 35px !important;
-  }
-}
-
-.info-title {
-  font-family: Tekur-bold;
-  margin-bottom: 10px;
-  font-size: 30px;
-  @media (min-width: 500px) {
-    margin-bottom: 10px;
-    font-size: 60px;
-  }
-  @media (min-width: 1024px) {
-    margin-bottom: 10px;
-    font-size: 40px;
   }
 }

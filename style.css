@@ -28,6 +28,15 @@
 
 .header .game-info {
   flex-grow: 1;
+  margin-top: 3px;
+  cursor: pointer;
+  width: 30px !important;
+  @media (min-width: 500px) {
+    width: 45px !important;
+  }
+  @media (min-width: 1024px) {
+    width: 35px !important;
+  }
 }
 
 button {
@@ -71,6 +80,97 @@ button {
   }
   @media (min-width: 1024px) {
     width: 25px;
+  }
+}
+
+.games-container {
+  margin-top: 20px;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  width: 100%;
+}
+
+.game-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-title {
+  margin-bottom: 7px;
+  font-size: 20px;
+  @media (min-width: 500px) {
+    font-size: 33px;
+  }
+}
+
+.game-img {
+  cursor: pointer;
+  width: 60px;
+  @media (min-width: 500px) {
+    width: 90px;
+  }
+}
+
+.black-screen {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.425);
+  z-index: 10;
+  height: calc(100dvh - 51px);
+  @media (min-width: 500px) {
+    height: calc(100dvh - 71px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100dvh - 51px);
+  }
+}
+
+.info-card {
+  position: absolute;
+  width: 300px;
+  height: 250px;
+  font-size: 21px;
+  background-color: rgb(183, 153, 255);
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  font-family: Tekur;
+  user-select: none;
+  padding: 20px;
+  text-align: center;
+  line-height: 1.5;
+  @media (min-width: 500px) {
+    width: 500px;
+    height: 500px;
+    font-size: 37px;
+  }
+  @media (min-width: 1024px) {
+    width: 400px;
+    height: 330px;
+    font-size: 28px;
+  }
+}
+
+.info-card:hover {
+  cursor: default;
+}
+
+.info-title {
+  font-family: Tekur-bold;
+  margin-bottom: 10px;
+  font-size: 30px;
+  @media (min-width: 500px) {
+    margin-bottom: 10px;
+    font-size: 60px;
+  }
+  @media (min-width: 1024px) {
+    margin-bottom: 10px;
+    font-size: 40px;
   }
 }
 
