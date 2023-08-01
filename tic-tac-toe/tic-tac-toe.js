@@ -88,13 +88,17 @@ function mark(divInfo) {
   }
 }
 
+// function that switches player
+function switchPlayer() {
+  player = player === "x" ? "o" : "x";
+}
+
 // function that adds to board and adds the image to the screen
 function playTurn(divInfo) {
   var div = document.querySelector(`.${divInfo.name}`);
   div.innerHTML = playersInfo[player].img.outerHTML;
   addToBoard(player, divInfo.position);
-
-  player = player === "x" ? "o" : "x";
+  switchPlayer();
 }
 
 // function that adds a mark on the board
@@ -174,30 +178,23 @@ function cpuPlay() {
     }
 
     if (enemyInRow === 2 && Object.values(freePosR).length) {
-      console.log(freePosR);
       printCpu(freePosR);
       return;
     }
     if (enemyInColumn === 2 && Object.values(freePosC).length) {
-      console.log(freePosC);
       printCpu(freePosC);
       return;
     }
     if (xInDiagonal1 === 2 && Object.values(freePos1).length) {
-      console.log(freePos1);
       printCpu(freePos1);
       return;
     }
 
     if (xInDiagonal2 === 2 && Object.values(freePos2).length) {
-      console.log(freePos2);
       printCpu(freePos2);
       return;
     }
-    // if (cpuMark(enemyInRow, freePosR)) return;
-    // cpuMark(enemyInColumn, freePosC);
   }
-  console.log("random");
   cpuRandom();
 }
 
@@ -205,7 +202,7 @@ function cpuPlay() {
 function printCpu(position) {
   var div = document.querySelector(`.${transPosToDiv(position)}`);
   div.innerHTML = oImg.outerHTML;
-  player = player === "x" ? "o" : "x";
+  switchPlayer();
   addToBoard("o", position);
 }
 
@@ -233,7 +230,6 @@ function checkRowsCol(mark, i) {
 
 // function that checks if someone won
 function checkGameOver() {
-  console.log("checking");
   //checking for winner in diagonals
 
   if (checkDia("x")) {
