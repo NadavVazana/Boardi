@@ -87,7 +87,10 @@ button {
   margin-top: 20px;
   position: absolute;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  @media (min-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
   column-gap: 20px;
   row-gap: 30px;
   width: 100%;
@@ -97,17 +100,28 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 15px;
+}
+
+.game-div:hover .game-img {
+  transform: scale(1.1);
+}
+
+.game-div:hover .game-title {
+  transform: scale(1.1);
 }
 
 .game-title {
   margin-bottom: 7px;
   font-size: 20px;
+  transition: transform 0.3s;
   @media (min-width: 500px) {
     font-size: 33px;
   }
 }
 
 .game-img {
+  transition: transform 0.3s;
   cursor: pointer;
   width: 60px;
   @media (min-width: 500px) {
