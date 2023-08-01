@@ -1,16 +1,166 @@
+.tic-tac-toe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100dvh;
+  user-select: none;
+}
+
 .tic-tac-toe-game {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
+  height: 60%;
+  width: 85%;
+  @media (min-width: 1024px) {
+    height: 70%;
+    width: 65%;
+  }
+}
+
+.black-screen {
+  margin-top: 51px;
+  @media (min-width: 500px) {
+    margin-top: 71px;
+  }
+  @media (min-width: 1024px) {
+    margin-top: 51px;
+  }
+}
+
+.choose-Buttons {
   position: absolute;
+  display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 30px;
+  white-space: nowrap;
+}
+
+.choose-Buttons * {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  padding: 7px;
+  margin: 7px;
+  @media (min-width: 500px) {
+    padding: 20px;
+    margin: 25px;
+  }
+  @media (min-width: 1024px) {
+    margin: 40px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .choose-Buttons *:hover {
+    background-color: rgb(206, 206, 206);
+  }
+}
+
+@media (hover: none) {
+  .choose-Buttons *:hover {
+    background-color: initial;
+  }
+}
+
+.winnerP {
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: 35px;
+  white-space: nowrap;
+}
+
+.play-again {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .play-again:hover {
+    background-color: rgb(206, 206, 206);
+  }
+}
+
+@media (hover: none) {
+  .play-again:hover {
+    background-color: initial;
+  }
 }
 
 .grid-item {
   padding: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.square1 {
-  border-bottom: 5px;
+@media (hover: hover) and (pointer: fine) {
+  .grid-item:hover {
+    background-color: rgb(172, 142, 243);
+  }
+}
+
+@media (hover: none) {
+  .grid-item:hover {
+    background-color: initial;
+  }
+}
+
+.vl {
+  position: absolute;
+}
+
+.vl-1 {
+  border-top: 2px black solid;
+  left: 0;
+  top: 33.3%;
+  width: 100%;
+}
+
+.vl-2 {
+  border-top: 2px black solid;
+  left: 0;
+  top: 66.6%;
+  width: 100%;
+}
+
+.vl-3 {
+  border-left: 2px black solid;
+  left: 33.3%;
+  height: 100%;
+}
+
+.vl-4 {
+  border-left: 2px black solid;
+  left: 66.6%;
+  height: 100%;
+}
+
+.x-image {
+  position: absolute;
+  width: 60px;
+  display: block;
+  margin: auto;
+}
+.o-image {
+  position: absolute;
+  width: 60px;
+  display: block;
+  margin: auto;
 }

@@ -22,16 +22,65 @@
         </div>
         <img onclick="toggleMute()" class="mute-img" src="" />
       </div>
+      <div class="black-screen">
+        <button
+          hidden
+          class="play-again"
+          onclick="showChooseBtns(), cleanBoard()"
+        >
+          Play Again!
+        </button>
+        <p class="winnerP"></p>
+        <div class="choose-Buttons">
+          <button onclick="startGame(), switchMethod(false)" class="cpu">
+            VS CPU
+          </button>
+          <button onclick="startGame(), switchMethod(true)" class="players">
+            2 PLAYERS
+          </button>
+        </div>
+      </div>
       <div class="tic-tac-toe-game">
-        <div class="square1 grid-item">1</div>
-        <div class="square2 grid-item">2</div>
-        <div class="square3 grid-item">3</div>
-        <div class="square4 grid-item">4</div>
-        <div class="square5 grid-item">5</div>
-        <div class="square6 grid-item">6</div>
-        <div class="square7 grid-item">7</div>
-        <div class="square8 grid-item">8</div>
-        <div class="square9 grid-item">9</div>
+        <div class="vl-1 vl"></div>
+        <div class="vl-2 vl"></div>
+        <div class="vl-3 vl"></div>
+        <div class="vl-4 vl"></div>
+        <div
+          onclick="mark({name:'square1',position:{x:0,y:0}})"
+          class="square1 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square2',position:{x:0,y:1}})"
+          class="square2 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square3',position:{x:0,y:2}})"
+          class="square3 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square4',position:{x:1,y:0}})"
+          class="square4 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square5',position:{x:1,y:1}})"
+          class="square5 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square6',position:{x:1,y:2}})"
+          class="square6 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square7',position:{x:2,y:0}})"
+          class="square7 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square8',position:{x:2,y:1}})"
+          class="square8 grid-item"
+        ></div>
+        <div
+          onclick="mark({name:'square9',position:{x:2,y:2}})"
+          class="square9 grid-item"
+        ></div>
       </div>
     </section>
   </body>
