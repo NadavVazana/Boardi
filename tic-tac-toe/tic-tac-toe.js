@@ -78,6 +78,7 @@ function checkCount() {
 
 // function that marks the div the user clicks and plays the cpu if needed
 function mark(divInfo) {
+  if (isCpu && player === "o") return;
   var div = document.querySelector(`.${divInfo.name}`);
   if (div.innerHTML) return;
   playTurn(divInfo);
@@ -200,10 +201,12 @@ function cpuPlay() {
 
 // function that prints the cpu move on the screen and gBoard
 function printCpu(position) {
-  var div = document.querySelector(`.${transPosToDiv(position)}`);
-  div.innerHTML = oImg.outerHTML;
-  switchPlayer();
-  addToBoard("o", position);
+  setTimeout(() => {
+    var div = document.querySelector(`.${transPosToDiv(position)}`);
+    div.innerHTML = oImg.outerHTML;
+    switchPlayer();
+    addToBoard("o", position);
+  }, 500);
 }
 
 // function that checks if player won in diagonals
