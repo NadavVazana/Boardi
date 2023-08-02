@@ -85,7 +85,6 @@ function mark(divInfo) {
   if (checkCount()) return;
   if (isCpu) {
     cpuPlay();
-    checkCount();
   }
 }
 
@@ -206,6 +205,7 @@ function printCpu(position) {
     div.innerHTML = oImg.outerHTML;
     switchPlayer();
     addToBoard("o", position);
+    checkCount();
   }, 500);
 }
 
