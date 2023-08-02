@@ -120,6 +120,7 @@ function cpuRandom() {
   printCpu(chosenPosition);
 }
 
+// function that checks if there is a mark in a position. returns true if it's enemy, returns null if it's the cpu and returns false if it's empty
 function cpuCheck(i, j) {
   if (gBoard[i][j]) {
     if (gBoard[i][j] !== player) {
@@ -131,6 +132,7 @@ function cpuCheck(i, j) {
   }
 }
 
+//function that prints the cpu on position if the enemycount in row/column/diagonal is 2, and there is a free position
 function cpuMark(enemyCount, pos) {
   if (enemyCount === 2 && Object.values(pos).length) {
     printCpu(pos);
@@ -176,24 +178,10 @@ function cpuPlay() {
         freePos2 = { x: j, y: 2 - j };
       }
     }
-
-    if (enemyInRow === 2 && Object.values(freePosR).length) {
-      printCpu(freePosR);
-      return;
-    }
-    if (enemyInColumn === 2 && Object.values(freePosC).length) {
-      printCpu(freePosC);
-      return;
-    }
-    if (xInDiagonal1 === 2 && Object.values(freePos1).length) {
-      printCpu(freePos1);
-      return;
-    }
-
-    if (xInDiagonal2 === 2 && Object.values(freePos2).length) {
-      printCpu(freePos2);
-      return;
-    }
+    if (cpuMark(enemyInRow, freePosR)) return;
+    if (cpuMark(enemyInColumn, freePosC)) return;
+    if (cpuMark(xInDiagonal1, freePos1)) return;
+    if (cpuMark(xInDiagonal2, freePos2)) return;
   }
   cpuRandom();
 }
