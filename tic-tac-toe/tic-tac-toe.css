@@ -9,7 +9,7 @@
 .tic-tac-toe-game {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   margin: auto;
   height: 60%;
   width: 85%;
@@ -40,29 +40,12 @@
 }
 
 .choose-Buttons * {
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  padding: 7px;
   margin: 7px;
   @media (min-width: 500px) {
-    padding: 20px;
     margin: 25px;
   }
   @media (min-width: 1024px) {
     margin: 40px;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .choose-Buttons *:hover {
-    background-color: rgb(206, 206, 206);
-  }
-}
-
-@media (hover: none) {
-  .choose-Buttons *:hover {
-    background-color: initial;
   }
 }
 
@@ -74,31 +57,18 @@
   transform: translate(-50%, -40%);
   font-size: 35px;
   white-space: nowrap;
+  @media (min-width: 500px) {
+    top: 38%;
+    font-size: 45px;
+  }
 }
 
 .play-again {
   position: absolute;
-  display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 30px;
   white-space: nowrap;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .play-again:hover {
-    background-color: rgb(206, 206, 206);
-  }
-}
-
-@media (hover: none) {
-  .play-again:hover {
-    background-color: initial;
-  }
 }
 
 .grid-item {
@@ -113,12 +83,6 @@
 @media (hover: hover) and (pointer: fine) {
   .grid-item:hover {
     background-color: rgb(172, 142, 243);
-  }
-}
-
-@media (hover: none) {
-  .grid-item:hover {
-    background-color: initial;
   }
 }
 

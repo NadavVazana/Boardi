@@ -25,17 +25,23 @@
       <div class="black-screen">
         <button
           hidden
-          class="play-again"
+          class="play-again main-btn"
           onclick="showChooseBtns(), cleanBoard()"
         >
           Play Again!
         </button>
         <p class="winnerP"></p>
         <div class="choose-Buttons">
-          <button onclick="startGame(), switchMethod(false)" class="cpu">
+          <button
+            onclick="startGame(), switchMethod(false)"
+            class="cpu main-btn"
+          >
             VS CPU
           </button>
-          <button onclick="startGame(), switchMethod(true)" class="players">
+          <button
+            onclick="startGame(), switchMethod(true)"
+            class="players main-btn"
+          >
             2 PLAYERS
           </button>
         </div>

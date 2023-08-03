@@ -1,0 +1,141 @@
+.memory-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100dvh;
+  user-select: none;
+}
+
+.memory-game-game {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin: auto;
+  height: 60%;
+  width: 85%;
+  @media (min-width: 500px) {
+    width: 65%;
+  }
+  @media (min-width: 1024px) {
+    width: 45%;
+    height: 70%;
+  }
+}
+
+.black-screen {
+  position: relative;
+  margin-top: 51px;
+  @media (min-width: 500px) {
+    margin-top: 71px;
+  }
+  @media (min-width: 1024px) {
+    margin-top: 51px;
+  }
+}
+
+.play-again-btn {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.difficulty-btns {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.normal-difficulties {
+  display: flex;
+}
+
+.difficulty-btns button {
+  margin: 7px;
+  white-space: nowrap;
+}
+
+.impossible-btn {
+  background-color: rgb(249, 108, 108);
+  animation: shake 0.8s infinite linear;
+}
+
+.impossible-btn:hover {
+  background-color: rgb(247, 66, 66) !important;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(0);
+  }
+}
+
+.end-game-msg {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: 35px;
+  white-space: nowrap;
+  @media (min-width: 500px) {
+    top: 38%;
+    font-size: 45px;
+  }
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: blueviolet;
+  border: 1px solid black;
+}
+
+.bunny-image,
+.bee-image,
+.chicken-image,
+.koala-image,
+.monkey-image,
+.tiger-image {
+  position: absolute;
+  width: 60px;
+  display: block;
+  margin: auto;
+}
+
+.collected-cards {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  margin-top: 50px;
+  @media (min-width: 1024px) {
+    margin-top: 20px;
+  }
+}
+
+.collected-cards > * {
+  position: static !important;
+  width: 50px;
+  margin: unset !important;
+  margin-right: 10px !important;
+}

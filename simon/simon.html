@@ -24,13 +24,15 @@
       </div>
       <div class="simon-game">
         <div class="black-screen">
-          <button onclick="startGame()" class="start-btn">Start!</button>
+          <button onclick="startGame()" class="start-btn main-btn">
+            Start!
+          </button>
         </div>
         <div class="trans-screen"></div>
         <div hidden class="lost">
-          <p class="you-lost">You Lost!</p>
+          <p class="you-lost end-msg">You Lost!</p>
           <p class="record"></p>
-          <button onclick="startGame()">Play Again</button>
+          <button onclick="startGame()" class="main-btn">Play Again</button>
         </div>
         <div class="simon-container">
           <div onclick="onClickColor('yellow')" class="yellow"></div>
