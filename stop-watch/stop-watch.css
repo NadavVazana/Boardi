@@ -46,22 +46,7 @@
 .start-btn,
 .play-again {
   position: absolute;
-  border-radius: 20px;
-  cursor: pointer;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
-  font-family: Tekur-Bold;
-  user-select: none;
-  padding: 20px;
-  font-size: 21px;
-  @media (min-width: 500px) {
-    padding: 30px;
-    font-size: 45px;
-  }
-  @media (min-width: 1024px) {
-    padding: 20px;
-    font-size: 30px;
-  }
 }
