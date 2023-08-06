@@ -8,6 +8,14 @@
   src: url("./assets/fonts/Tektur-Bold.ttf");
 }
 
+.form-icon {
+  width: 30px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .header {
   user-select: none;
   position: relative;

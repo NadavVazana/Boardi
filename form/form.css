@@ -1,0 +1,33 @@
+.form {
+  position: absolute;
+  display: grid;
+  top: 10%;
+}
+
+.form > * {
+  margin: 10px;
+}
+
+.full-name {
+  display: flex;
+  width: 90%;
+  margin: auto;
+}
+
+.full-name > *:first-child {
+  margin-right: 5px;
+}
+
+.form input,
+.form button {
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  width: 90%;
+  border: unset;
+  background-color: blueviolet;
+}
+
+::placeholder {
+  color: rgba(68, 68, 68, 0.779);
+}

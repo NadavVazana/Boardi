@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="form.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boardie</title>
+    <link
+      rel="shortcut icon"
+      href="../assets/images/gaming-controller-gamepad-joystick-game-console-svgrepo-com.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body onload="onAppLoad()">
+    <section class="stop-watch">
+      <div class="header">
+        <div class="game-info"></div>
+        <div onclick="returnHome()" class="logo-container">
+          <img src="../assets/images/logo.png" />
+          <h1>oardie</h1>
+        </div>
+      </div>
+      <div class="form-container">
+        <form onsubmit="onSubmit(event)" class="form">
+          <div class="full-name">
+            <input type="text" placeholder="name" />
+            <input type="text" placeholder="last name" />
+          </div>
+          <input type="text" placeholder="phone" />
+          <input type="text" placeholder="email" />
+          <button class="form-btn">Submit</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
+
+<script src="form.js"></script>
+<script src="../main.js"></script>
