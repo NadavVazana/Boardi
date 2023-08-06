@@ -108,6 +108,7 @@ function addToBoard(mark, position) {
 
 // functions that generates random free positions for cpu
 function cpuRandom() {
+  console.log("random");
   var options = [];
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
@@ -121,14 +122,50 @@ function cpuRandom() {
 }
 
 // function that checks if there is a mark in a position. returns true if it's enemy, returns null if it's the cpu and returns false if it's empty
-function cpuCheck(i, j) {
+function cpuCheck(i, j, checkMethod) {
   if (gBoard[i][j]) {
-    if (gBoard[i][j] !== player) {
-      return true;
+    if (checkMethod === "win") {
+      if (gBoard[i][j] === player) {
+        return true;
+      }
+      return null;
+    } else {
+      if (gBoard[i][j] !== player) {
+        return true;
+      }
+      return null;
     }
-    return null;
-  } else {
-    return false;
+  }
+  return false;
+}
+
+//new function
+function plannedCpu() {
+  var options = [];
+  for (let i = 0; i < 3; i++) {
+    var playerInRow = 0;
+    var emptyPlaces = [];
+    for (let j = 0; j < 3; j++) {
+      if (gBoard[i][j]) {
+        if (gBoard[i][j] === player) {
+          playerInRow++;
+        } else {
+          var emptyPlaces = [];
+          break;
+        }
+      } else {
+        emptyPlaces.push({ x: i, y: j });
+      }
+    }
+    if (emptyPlaces.length) {
+      options.push({ emptyPlaces, playerInRow });
+    }
+  }
+  var bestOption = options[0];
+  for (let i = 1; i < bestOption.length - 1; i++) {
+    if (options[i].playerInRow > bestOption.playerInRow) {
+      bestOption = options[i];
+    }
   }
 }
 
@@ -142,6 +179,19 @@ function cpuMark(enemyCount, pos) {
 
 //function that makes the best move for cpu and plays random if there is none
 function cpuPlay() {
+  if (cpuBlock("win")) {
+    console.log("straat win");
+    return;
+  }
+  if (cpuBlock("block")) {
+    console.log("straat block");
+    return;
+  }
+  cpuRandom();
+}
+
+//function that marks cpu in a position to block the player
+function cpuBlock(checkMethod) {
   for (let i = 0; i < 3; i++) {
     var enemyInRow = 0;
     var freePosR = {};
@@ -154,36 +204,35 @@ function cpuPlay() {
 
     for (let j = 0; j < 3; j++) {
       // checks the rows
-      if (cpuCheck(i, j)) {
+      if (cpuCheck(i, j, checkMethod)) {
         enemyInRow++;
-      } else if (cpuCheck(i, j) !== null) {
+      } else if (cpuCheck(i, j, checkMethod) !== null) {
         freePosR = { x: i, y: j };
       }
       // checks the colums
-      if (cpuCheck(j, i)) {
+      if (cpuCheck(j, i, checkMethod)) {
         enemyInColumn++;
-      } else if (cpuCheck(j, i) !== null) {
+      } else if (cpuCheck(j, i, checkMethod) !== null) {
         freePosC = { x: j, y: i };
       }
       // checks diagonal 1
-      if (cpuCheck(j, j)) {
+      if (cpuCheck(j, j, checkMethod)) {
         xInDiagonal1++;
-      } else if (cpuCheck(j, j) !== null) {
+      } else if (cpuCheck(j, j, checkMethod) !== null) {
         freePos1 = { x: j, y: j };
       }
       //   // checks diagonal 2
-      if (cpuCheck(j, 2 - j)) {
+      if (cpuCheck(j, 2 - j, checkMethod)) {
         xInDiagonal2++;
-      } else if (cpuCheck(j, 2 - j) !== null) {
+      } else if (cpuCheck(j, 2 - j, checkMethod) !== null) {
         freePos2 = { x: j, y: 2 - j };
       }
     }
-    if (cpuMark(enemyInRow, freePosR)) return;
-    if (cpuMark(enemyInColumn, freePosC)) return;
-    if (cpuMark(xInDiagonal1, freePos1)) return;
-    if (cpuMark(xInDiagonal2, freePos2)) return;
+    if (cpuMark(enemyInRow, freePosR)) return true;
+    if (cpuMark(enemyInColumn, freePosC)) return true;
+    if (cpuMark(xInDiagonal1, freePos1)) return true;
+    if (cpuMark(xInDiagonal2, freePos2)) return true;
   }
-  cpuRandom();
 }
 
 // function that prints the cpu move on the screen and gBoard
