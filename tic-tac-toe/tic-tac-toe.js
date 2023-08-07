@@ -138,35 +138,130 @@ function cpuCheck(i, j, checkMethod) {
   }
   return false;
 }
-
 //new function
 function plannedCpu() {
-  var options = [];
-  for (let i = 0; i < 3; i++) {
-    var playerInRow = 0;
-    var emptyPlaces = [];
-    for (let j = 0; j < 3; j++) {
-      if (gBoard[i][j]) {
-        if (gBoard[i][j] === player) {
-          playerInRow++;
-        } else {
-          var emptyPlaces = [];
-          break;
+  var rows = [];
+  var columns = [];
+  for (let i = 0; i < gBoard.length; i++) {
+    //rows
+    if (checkRows(i)) {
+      rows.push({ position: i, place: gBoard[i] });
+    }
+    //columns
+    // var columns = [];
+    // for (let j = 0; j < 3; j++) {
+    if (checkColumns(i)) {
+      columns.push({ place: buildColumns(i), position: i });
+    }
+    // }
+  }
+  if (getBestOption(rows) && getBestOption(columns)) {
+    if (
+      getBestOption(rows).bestOption.amount >
+      getBestOption(columns).bestOption.amount
+    ) {
+      console.log("best row more then columns");
+      var bestOption = getBestOption(rows);
+      printCpu({
+        x: bestOption.bestOption.position,
+        y: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+      });
+      return true;
+    } else if (
+      getBestOption(rows).bestOption.amount <
+      getBestOption(columns).bestOption.amount
+    ) {
+      console.log("best column more then rows");
+      var bestOption = getBestOption(columns);
+      printCpu({
+        x: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+        y: bestOption.bestOption.position,
+      });
+      return true;
+    }
+  }
+
+  if (getBestOption(rows)) {
+    console.log("there is best row");
+    var bestOption = getBestOption(rows);
+    printCpu({
+      x: bestOption.bestOption.position,
+      y: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+    });
+    return true;
+  }
+  if (getBestOption(columns)) {
+    console.log("there is best column");
+    var bestOption = getBestOption(columns);
+    printCpu({
+      x: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+      y: bestOption.bestOption.position,
+    });
+    return true;
+  }
+}
+
+//function that returns the column of the given i
+function buildColumns(i) {
+  return gBoard.map((row) => {
+    return row[i];
+  });
+  // var isPass = !column.some((item) => item === "x");
+  // return isPass ? { place: column, position: i } : false;
+}
+
+//returns an object with the best option in the item+the free indexes if
+//there are objects in the item, else returns false
+function getBestOption(items) {
+  if (items.length) {
+    var newItems = items.map((item) => {
+      var counter = 0;
+      item.place.forEach((innerItem) => {
+        if (innerItem === "o") {
+          counter++;
         }
-      } else {
-        emptyPlaces.push({ x: i, y: j });
+      });
+      return { ...item, amount: counter };
+    });
+    var bestOption = newItems[0];
+    newItems.forEach((item) => {
+      if (bestOption.amount < item.amount) {
+        bestOption = item;
       }
-    }
-    if (emptyPlaces.length) {
-      options.push({ emptyPlaces, playerInRow });
-    }
+    });
+
+    var indexes = [];
+    bestOption.place.forEach((place, index) => {
+      if (!place) {
+        indexes.push(index);
+      }
+    });
+    console.log(
+      "checking:",
+      items,
+      "bestoption:",
+      bestOption,
+      "indexes:",
+      indexes
+    );
+    return { bestOption, indexes };
   }
-  var bestOption = options[0];
-  for (let i = 1; i < bestOption.length - 1; i++) {
-    if (options[i].playerInRow > bestOption.playerInRow) {
-      bestOption = options[i];
-    }
-  }
+  return false;
+}
+// returns true if there are no x's on the row
+function checkRows(i) {
+  return !gBoard[i].some((item) => {
+    return item === "x";
+  });
+}
+
+// returns true if there are no x's on the column
+function checkColumns(i) {
+  return !buildColumns(i).some((item) => {
+    return item === "x";
+  });
+  // console.log("hello");
+  // return isPass ? { place: buildColumns(i), position: i } : false;
 }
 
 //function that prints the cpu on position if the enemycount in row/column/diagonal is 2, and there is a free position
@@ -179,15 +274,35 @@ function cpuMark(enemyCount, pos) {
 
 //function that makes the best move for cpu and plays random if there is none
 function cpuPlay() {
+  if (isCorner() && turnsCount === 1) {
+    printCpu({ x: 1, y: 1 });
+    return;
+  }
   if (cpuBlock("win")) {
-    console.log("straat win");
+    console.log("strat win");
     return;
   }
   if (cpuBlock("block")) {
-    console.log("straat block");
+    console.log("strat block");
+    return;
+  }
+  if (plannedCpu()) {
+    console.log("planned");
     return;
   }
   cpuRandom();
+}
+
+//function that checks if the player marked in one of the corners
+function isCorner() {
+  if (
+    gBoard[0][0] === "x" ||
+    gBoard[0][2] === "x" ||
+    gBoard[2][0] === "x" ||
+    gBoard[2][2] === "x"
+  ) {
+    return true;
+  }
 }
 
 //function that marks cpu in a position to block the player
