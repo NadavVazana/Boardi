@@ -108,7 +108,6 @@ function addToBoard(mark, position) {
 
 // functions that generates random free positions for cpu
 function cpuRandom() {
-  console.log("random");
   var options = [];
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
@@ -151,16 +150,12 @@ function plannedCpu() {
     //rows
     if (checkRows(i)) {
       rows.push({ position: i, place: gBoard[i] });
-      // console.log("push row:", { position: i, place: gBoard[i] });
     }
     //columns
     if (checkColumns(i)) {
       columns.push({ place: buildColumns(i), position: i });
-      // console.log("push columns:", { place: buildColumns(i), position: i });
     }
   }
-  // console.log("rows", rows);
-  // console.log("columns", columns);
 
   //if there is a best option in both rows and columns,
   //it checks wich one is best and prints it
@@ -168,11 +163,9 @@ function plannedCpu() {
     var rowsAmount = getBestOption(rows).bestOption.amount;
     var columnsAmount = getBestOption(columns).bestOption.amount;
     if (rowsAmount < columnsAmount) {
-      // console.log("best column better then row");
       printBestCpu(columns, "columns");
       return true;
     }
-    // console.log("best row better then column");
     printBestCpu(rows, "rows");
     return true;
   }
@@ -193,14 +186,12 @@ function ifBestPrint(item, itemName) {
 function printBestCpu(item, itemName) {
   var bestOption = getBestOption(item);
   if (itemName === "rows") {
-    console.log("printing best rows");
     printCpu({
       x: bestOption.bestOption.position,
       y: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
     });
     return;
   }
-  console.log("printing best columns");
   printCpu({
     x: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
     y: bestOption.bestOption.position,
@@ -285,15 +276,12 @@ function cpuPlay() {
     return;
   }
   if (cpuStrategic("win")) {
-    console.log("strat win");
     return;
   }
   if (cpuStrategic("block")) {
-    console.log("strat block");
     return;
   }
   if (plannedCpu()) {
-    console.log("planned");
     return;
   }
   cpuRandom();
@@ -364,7 +352,6 @@ function printCpu(position) {
     switchPlayer();
     addToBoard("o", position);
     checkCount();
-    console.log("printing cpu");
   }, 500);
 }
 
