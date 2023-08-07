@@ -120,16 +120,145 @@ function cpuRandom() {
   printCpu(chosenPosition);
 }
 
-// function that checks if there is a mark in a position. returns true if it's enemy, returns null if it's the cpu and returns false if it's empty
-function cpuCheck(i, j) {
+// function that checks if there is a mark in a position.
+//if you check  for win, it returns true if it's cpu and returns null if it's the enemy
+// if you check for blocking place, it returns true if it's enemy and returns null if it's the cpu
+// returns false if div is empty
+function cpuCheck(i, j, checkMethod) {
   if (gBoard[i][j]) {
-    if (gBoard[i][j] !== player) {
+    if (checkMethod === "win") {
+      if (gBoard[i][j] === player) {
+        return true;
+      }
+      return null;
+    } else {
+      if (gBoard[i][j] !== player) {
+        return true;
+      }
+      return null;
+    }
+  }
+  return false;
+}
+
+// function that checks row & columns for best placment for cpuPrint
+//returns true if it found
+function plannedCpu() {
+  var rows = [];
+  var columns = [];
+  for (let i = 0; i < gBoard.length; i++) {
+    //rows
+    if (checkRows(i)) {
+      rows.push({ position: i, place: gBoard[i] });
+    }
+    //columns
+    if (checkColumns(i)) {
+      columns.push({ place: buildColumns(i), position: i });
+    }
+  }
+
+  //if there is a best option in both rows and columns,
+  //it checks wich one is best and prints it
+  if (getBestOption(rows) && getBestOption(columns)) {
+    var rowsAmount = getBestOption(rows).bestOption.amount;
+    var columnsAmount = getBestOption(columns).bestOption.amount;
+    if (rowsAmount < columnsAmount) {
+      printBestCpu(columns, "columns");
       return true;
     }
-    return null;
-  } else {
-    return false;
+    printBestCpu(rows, "rows");
+    return true;
   }
+
+  if (ifBestPrint(rows, "rows")) return true;
+  if (ifBestPrint(columns, "columns")) return true;
+}
+
+//function that checks if there is a best option and prints if there is
+function ifBestPrint(item, itemName) {
+  if (getBestOption(item)) {
+    printBestCpu(item, itemName);
+    return true;
+  }
+}
+
+//function that prints best option, according to if you send rows or columnns
+function printBestCpu(item, itemName) {
+  var bestOption = getBestOption(item);
+  if (itemName === "rows") {
+    printCpu({
+      x: bestOption.bestOption.position,
+      y: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+    });
+    return;
+  }
+  printCpu({
+    x: bestOption.indexes[getRandomInt(0, bestOption.indexes.length)],
+    y: bestOption.bestOption.position,
+  });
+}
+
+//function that returns the column of the given i
+function buildColumns(i) {
+  return gBoard.map((row) => {
+    return row[i];
+  });
+}
+
+//returns an object with the best option in the item+the free indexes if
+//there are objects in the item, else returns false
+function getBestOption(items) {
+  if (items.length) {
+    var newItems = getNewItems(items);
+    var bestOption = findBestOption(newItems);
+    var indexes = [];
+
+    bestOption.place.forEach((place, index) => {
+      if (!place) {
+        indexes.push(index);
+      }
+    });
+    return { bestOption, indexes };
+  }
+  return false;
+}
+
+//returns array of items with previus value + amount of o's
+function getNewItems(items) {
+  return items.map((item) => {
+    var counter = 0;
+    item.place.forEach((innerItem) => {
+      if (innerItem === "o") {
+        counter++;
+      }
+    });
+    return { ...item, amount: counter };
+  });
+}
+
+// returns the option with the largest amount
+function findBestOption(newItems) {
+  var bestOption = newItems[0];
+  newItems.forEach((item) => {
+    if (bestOption.amount < item.amount) {
+      bestOption = item;
+    }
+  });
+  return bestOption;
+}
+
+// returns true if there are no x's on the row
+function checkRows(i) {
+  return !gBoard[i].some((item) => {
+    return item === "x";
+  });
+}
+
+// returns true if there are no x's on the column
+function checkColumns(i) {
+  return !buildColumns(i).some((item) => {
+    return item === "x";
+  });
 }
 
 //function that prints the cpu on position if the enemycount in row/column/diagonal is 2, and there is a free position
@@ -142,6 +271,36 @@ function cpuMark(enemyCount, pos) {
 
 //function that makes the best move for cpu and plays random if there is none
 function cpuPlay() {
+  if (isCorner() && turnsCount === 1) {
+    printCpu({ x: 1, y: 1 });
+    return;
+  }
+  if (cpuStrategic("win")) {
+    return;
+  }
+  if (cpuStrategic("block")) {
+    return;
+  }
+  if (plannedCpu()) {
+    return;
+  }
+  cpuRandom();
+}
+
+//function that checks if the player marked in one of the corners
+function isCorner() {
+  if (
+    gBoard[0][0] === "x" ||
+    gBoard[0][2] === "x" ||
+    gBoard[2][0] === "x" ||
+    gBoard[2][2] === "x"
+  ) {
+    return true;
+  }
+}
+
+//function that marks cpu in a position to block the player or win game
+function cpuStrategic(checkMethod) {
   for (let i = 0; i < 3; i++) {
     var enemyInRow = 0;
     var freePosR = {};
@@ -154,36 +313,35 @@ function cpuPlay() {
 
     for (let j = 0; j < 3; j++) {
       // checks the rows
-      if (cpuCheck(i, j)) {
+      if (cpuCheck(i, j, checkMethod)) {
         enemyInRow++;
-      } else if (cpuCheck(i, j) !== null) {
+      } else if (cpuCheck(i, j, checkMethod) !== null) {
         freePosR = { x: i, y: j };
       }
       // checks the colums
-      if (cpuCheck(j, i)) {
+      if (cpuCheck(j, i, checkMethod)) {
         enemyInColumn++;
-      } else if (cpuCheck(j, i) !== null) {
+      } else if (cpuCheck(j, i, checkMethod) !== null) {
         freePosC = { x: j, y: i };
       }
       // checks diagonal 1
-      if (cpuCheck(j, j)) {
+      if (cpuCheck(j, j, checkMethod)) {
         xInDiagonal1++;
-      } else if (cpuCheck(j, j) !== null) {
+      } else if (cpuCheck(j, j, checkMethod) !== null) {
         freePos1 = { x: j, y: j };
       }
       //   // checks diagonal 2
-      if (cpuCheck(j, 2 - j)) {
+      if (cpuCheck(j, 2 - j, checkMethod)) {
         xInDiagonal2++;
-      } else if (cpuCheck(j, 2 - j) !== null) {
+      } else if (cpuCheck(j, 2 - j, checkMethod) !== null) {
         freePos2 = { x: j, y: 2 - j };
       }
     }
-    if (cpuMark(enemyInRow, freePosR)) return;
-    if (cpuMark(enemyInColumn, freePosC)) return;
-    if (cpuMark(xInDiagonal1, freePos1)) return;
-    if (cpuMark(xInDiagonal2, freePos2)) return;
+    if (cpuMark(enemyInRow, freePosR)) return true;
+    if (cpuMark(enemyInColumn, freePosC)) return true;
+    if (cpuMark(xInDiagonal1, freePos1)) return true;
+    if (cpuMark(xInDiagonal2, freePos2)) return true;
   }
-  cpuRandom();
 }
 
 // function that prints the cpu move on the screen and gBoard
@@ -222,30 +380,23 @@ function checkRowsCol(mark, i) {
 // function that checks if someone won
 function checkGameOver() {
   //checking for winner in diagonals
-
-  if (checkDia("x")) {
-    return true;
-  }
-  if (checkDia("o")) {
-    return true;
-  }
+  if (checkDia("x") || checkDia("o")) return true;
 
   //checking for winner in rows & columns
   for (let i = 0; i < 3; i++) {
-    if (checkRowsCol("x", i)) {
-      return true;
-    }
-    if (checkRowsCol("o", i)) {
-      return true;
-    }
+    if (checkRowsCol("x", i) || checkRowsCol("o", i)) return true;
   }
   // checking if the board is full
+  if (isBoardFull()) return true;
+}
+
+//function that checks if board is full
+function isBoardFull() {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (!gBoard[i][j]) return;
     }
   }
-
   winnerPEL.innerHTML = "Game Over";
   return true;
 }
