@@ -70,7 +70,7 @@ function addToResults(string, divName) {
 
 //function that adds number to results and correct var
 function addToResultsandVar(string) {
-  if (addSpecialNum()) return;
+  // if (addSpecialNum()) return;
   if (hasOperator) {
     resetVar("after");
     afterOperator = +(afterOperator.toString() + string.toString());
@@ -148,24 +148,34 @@ function preventSameClick(divName) {
 function preventDiffClick(divName) {
   if (selectedBtn && selectedBtn !== document.querySelector(`.${divName}`)) {
     if (hasOperator) {
-      if (typeof afterOperator === "object") {
-        if (!afterOperator.numbers[1]) {
-          return true;
-        }
-      } else {
-        if (!afterOperator) {
-          return true;
-        }
+      if (isVarEmpy("after")) return true;
+    } else {
+      if (isVarEmpy("before")) return true;
+    }
+  }
+}
+
+//function that checks if correct vat is empty
+//returns true if it is
+function isVarEmpy(varName) {
+  if (varName === "before") {
+    if (typeof beforeOperator === "object") {
+      if (!beforeOperator.numbers[1]) {
+        return true;
       }
     } else {
-      if (typeof beforeOperator === "object") {
-        if (!beforeOperator.numbers[1]) {
-          return true;
-        }
-      } else {
-        if (!beforeOperator) {
-          return true;
-        }
+      if (!beforeOperator) {
+        return true;
+      }
+    }
+  } else {
+    if (typeof afterOperator === "object") {
+      if (!afterOperator.numbers[1]) {
+        return true;
+      }
+    } else {
+      if (!afterOperator) {
+        return true;
       }
     }
   }
@@ -224,7 +234,7 @@ function createObject(varName, string) {
 
 //function that returns true if a string is a number
 function isNumber(string) {
-  if (!isNaN(parseInt(string))) {
+  if (!isNaN(parseInt(string)) || string === ".") {
     return true;
   }
 }
