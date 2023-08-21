@@ -6,7 +6,6 @@ const gMoves = [
   { name: "paper", element: paper, wins: "rock" },
   { name: "scissors", element: scissors, wins: "paper" },
 ];
-const cpuLoad = ["CPU is choosing.", "CPU is choosing..", "CPU is choosing..."];
 const cpuEl = document.querySelector(".cpu");
 const blackScreenEl = document.querySelector(".black-screen");
 const endMsgEl = document.querySelector(".end-msg");
@@ -24,20 +23,26 @@ function startGame() {
   isGameOver = false;
   cpuEl.innerText = "Choose your move:";
   if (playerChoice) {
-    cleanEl(playerChoice.element);
+    cleanElBg(playerChoice.element);
+  }
+  if (!rock.classList.contains("move-hover")) {
+    console.log("hi");
+    addHover();
   }
 }
 
 //function that playes a turn on player's click
 function playTurn(move) {
   if (isGameOver) return;
+
+  removeHover();
   markChoice(move);
   isGameOver = true;
 
   playerChoice = getObject(move);
   cpuChoice = cpuRandom();
 
-  cpuLoader(cpuChoice);
+  showCpuChoice(cpuChoice);
 
   console.log("playerChoice", playerChoice);
   console.log("cpuChoice", cpuChoice);
@@ -62,38 +67,16 @@ function markChoice(move) {
 }
 
 //function that cleans the background color of element
-function cleanEl(element) {
-  element.style.backgroundColor = "blueviolet";
-}
-
-//function that present the cpu load to user and then shows the result
-function cpuLoader(cpuChoice) {
-  cpuEl.innerText = "";
-  var i = 0;
-  var time = 0;
-  const intevalId = setInterval(() => {
-    if (time != 7) {
-      currText = cpuLoad[i];
-      cpuEl.innerText = currText;
-      if (i === 2) {
-        i = 0;
-      } else {
-        i++;
-      }
-      time++;
-    } else {
-      cpuEl.innerText = "";
-      showCpuChoice(cpuChoice);
-      clearInterval(intevalId);
-    }
-  }, 1000);
+function cleanElBg(element) {
+  element.style.backgroundColor = "";
 }
 
 //function that presrnts cpuChoice to user and prevents it
 function showCpuChoice(cpuChoice) {
+  cpuEl.innerText = "";
   const choiceEl = cpuChoice.element;
   const choiceElClone = choiceEl.cloneNode(true);
-  cleanEl(choiceElClone);
+  cleanElBg(choiceElClone);
   cpuEl.appendChild(choiceElClone);
   showEndScreen();
 }
@@ -103,7 +86,7 @@ function showEndScreen() {
   setTimeout(() => {
     blackScreenEl.hidden = false;
     endMsgEl.innerText = getMsg();
-  }, 1500);
+  }, 500);
 }
 
 //function that returns the msg to player
@@ -127,4 +110,18 @@ function cpuRandom() {
 // function that give a random number between min and max (not including max)
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//function that removes hover properties from all moves
+function removeHover() {
+  rock.classList.remove("move-hover");
+  paper.classList.remove("move-hover");
+  scissors.classList.remove("move-hover");
+}
+
+//function that adds hover properties to all moves
+function addHover() {
+  rock.classList.add("move-hover");
+  paper.classList.add("move-hover");
+  scissors.classList.add("move-hover");
 }
