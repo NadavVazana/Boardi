@@ -64,6 +64,14 @@ function endGame() {
   winnerPEL.hidden = false;
 }
 
+//function that restarts the game
+function restartGame() {
+  player = "x";
+  blackScreenEL.hidden = false;
+  showChooseBtns();
+  cleanBoard();
+}
+
 // function that checks if someone won after 5 turns
 function checkCount() {
   if (turnsCount <= 3) {

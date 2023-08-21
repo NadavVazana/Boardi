@@ -128,3 +128,14 @@
   display: block;
   margin: auto;
 }
+
+.restart {
+  cursor: pointer;
+  width: 30px;
+  @media (min-width: 500px) {
+    width: 40px;
+  }
+  @media (min-width: 1024px) {
+    width: 30px;
+  }
+}
