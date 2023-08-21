@@ -121,7 +121,8 @@ button {
   margin-bottom: 7px;
   font-size: 20px;
   transition: transform 0.3s;
-  white-space: nowrap;
+  /* white-space: nowrap; */
+  text-align: center;
   @media (min-width: 500px) {
     font-size: 33px;
   }
