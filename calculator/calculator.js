@@ -486,3 +486,42 @@ function sliceDash() {
     resultsEL.innerHTML.length
   );
 }
+
+//function that adds a dot
+function addDot() {
+  if (hasOperator) {
+    if (isSpecialOperator) {
+      const numToString = `${afterOperator.numbers[1]}.`;
+      afterOperator.numbers[1] = numToString;
+      resultsEL.innerHTML = afterOperator.numbers[1];
+    } else {
+      const numToString = `${afterOperator}.`;
+      afterOperator = numToString;
+      resultsEL.innerHTML = afterOperator;
+    }
+  } else {
+    if (isSpecialOperator) {
+      const numToString = `${beforeOperator.numbers[1]}.`;
+      beforeOperator.numbers[1] = numToString;
+      resultsEL.innerHTML = beforeOperator.numbers[1];
+    } else {
+      const numToString = `${beforeOperator}.`;
+      beforeOperator = numToString;
+      resultsEL.innerHTML = beforeOperator;
+      console.log(beforeOperator.toString());
+      console.log(typeof beforeOperator.toString());
+    }
+  }
+}
+
+// if (hasOperator) {
+//   if (isSpecialOperator) {
+//     //after operator with spaciel
+//   }
+//  //after operator normal
+// } else {
+//   if (isSpecialOperator) {
+//    //befor operator with spaciel
+//   }
+//  //before operator normal
+// }
