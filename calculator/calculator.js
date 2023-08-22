@@ -16,6 +16,7 @@ const operatorMapping = {
 
 //function that adds the pressed div to results
 function addToResults(string, divName) {
+  console.log(getCurrVar());
   //adds number to the correct var
   if (isNumber(string)) {
     removeBtnCss(divName);
@@ -283,35 +284,43 @@ function calcPercent() {
 
 //function that sets value of result to correct var
 function setResult(result) {
-  if (hasOperator) {
-    if (typeof afterOperator === "object") {
-      afterOperator.numbers[1] = result;
-    } else {
-      afterOperator = result;
-    }
-  } else {
-    if (typeof beforeOperator === "object") {
-      beforeOperator.numbers[1] = result;
-    } else {
+  const currVar = getCurrVar();
+
+  switch (currVar) {
+    case "before":
       beforeOperator = result;
-    }
+      break;
+
+    case "before special":
+      beforeOperator.numbers[1] = result;
+      break;
+
+    case "after":
+      afterOperator = result;
+      break;
+
+    case "after special":
+      afterOperator.numbers[1] = result;
+      break;
   }
 }
 
 //function that returns correect value of 'a'
 function getA() {
-  if (hasOperator) {
-    if (typeof afterOperator === "object") {
-      return afterOperator.numbers[1];
-    } else {
-      return afterOperator;
-    }
-  } else {
-    if (typeof beforeOperator === "object") {
-      return beforeOperator.numbers[1];
-    } else {
+  const currVar = getCurrVar();
+
+  switch (currVar) {
+    case "before":
       return beforeOperator;
-    }
+
+    case "before special":
+      return beforeOperator.numbers[1];
+
+    case "after":
+      return afterOperator;
+
+    case "after special":
+      return afterOperator.numbers[1];
   }
 }
 
@@ -373,12 +382,29 @@ function cleanResults() {
 //function that deletes the last character in results and vars
 function deleteLastChar() {
   resultsEL.innerHTML = resultsEL.innerHTML.slice(0, -1);
-  if (hasOperator) {
-    var string = `${afterOperator}`;
-    afterOperator = +string.slice(0, -1);
-  } else {
-    var string = `${beforeOperator}`;
-    beforeOperator = +string.slice(0, -1);
+
+  const currVar = getCurrVar();
+
+  switch (currVar) {
+    case "before":
+      var string = `${beforeOperator}`;
+      beforeOperator = +string.slice(0, -1);
+      break;
+
+    case "before special":
+      var string = `${beforeOperator.numbers[1]}`;
+      beforeOperator.numbers[1] = +string.slice(0, -1);
+      break;
+
+    case "after":
+      var string = `${afterOperator}`;
+      afterOperator = +string.slice(0, -1);
+      break;
+
+    case "after special":
+      var string = `${afterOperator.numbers[1]}`;
+      afterOperator.numbers[1] = +string.slice(0, -1);
+      break;
   }
 }
 
@@ -489,39 +515,58 @@ function sliceDash() {
 
 //function that adds a dot
 function addDot() {
-  if (hasOperator) {
-    if (isSpecialOperator) {
-      const numToString = `${afterOperator.numbers[1]}.`;
-      afterOperator.numbers[1] = numToString;
-      resultsEL.innerHTML = afterOperator.numbers[1];
-    } else {
-      const numToString = `${afterOperator}.`;
-      afterOperator = numToString;
-      resultsEL.innerHTML = afterOperator;
-    }
-  } else {
-    if (isSpecialOperator) {
-      const numToString = `${beforeOperator.numbers[1]}.`;
-      beforeOperator.numbers[1] = numToString;
-      resultsEL.innerHTML = beforeOperator.numbers[1];
-    } else {
-      const numToString = `${beforeOperator}.`;
+  const currVar = getCurrVar();
+  var numToString;
+
+  switch (currVar) {
+    case "before":
+      if (beforeOperator.toString().includes(".")) return;
+      numToString = `${beforeOperator}.`;
       beforeOperator = numToString;
       resultsEL.innerHTML = beforeOperator;
-      console.log(beforeOperator.toString());
-      console.log(typeof beforeOperator.toString());
-    }
+      break;
+
+    case "before special":
+      if (beforeOperator.numbers[1].toString().includes(".")) return;
+      numToString = `${beforeOperator.numbers[1]}.`;
+      beforeOperator.numbers[1] = numToString;
+      resultsEL.innerHTML = beforeOperator.numbers[1];
+      break;
+
+    case "after":
+      if (afterOperator.toString().includes(".")) return;
+      numToString = `${afterOperator}.`;
+      afterOperator = numToString;
+      resultsEL.innerHTML = afterOperator;
+      return;
+
+    case "after special":
+      if (afterOperator.numbers[1].toString().includes(".")) return;
+      numToString = `${afterOperator.numbers[1]}.`;
+      afterOperator.numbers[1] = numToString;
+      resultsEL.innerHTML = afterOperator.numbers[1];
+      return;
   }
 }
 
-// if (hasOperator) {
-//   if (isSpecialOperator) {
-//     //after operator with spaciel
-//   }
-//  //after operator normal
-// } else {
-//   if (isSpecialOperator) {
-//    //befor operator with spaciel
-//   }
-//  //before operator normal
-// }
+//function that returns what var are we in
+//before operator normal: 'before'
+//before operator special: 'before special'
+//after operator normal: 'after'
+//after operator special: 'after special'
+
+function getCurrVar() {
+  if (hasOperator) {
+    if (isSpecialOperator) {
+      return "after special";
+    } else {
+      return "after";
+    }
+  } else {
+    if (isSpecialOperator) {
+      return "before special";
+    } else {
+      return "before";
+    }
+  }
+}
