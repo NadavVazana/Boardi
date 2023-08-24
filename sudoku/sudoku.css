@@ -1,0 +1,76 @@
+.sudoku-game {
+  font-weight: bold;
+  position: relative;
+  height: calc(100dvh - 51px);
+  @media (min-width: 500px) {
+    height: calc(100dvh - 71px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100dvh - 51px);
+  }
+}
+
+.sudoku-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: absolute;
+  border: 5px solid black;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 333px;
+  height: 333px;
+  @media (min-width: 630px) {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+.big-square {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.litte-square {
+  border: 1px solid rgb(27, 27, 27);
+}
+
+.numbers-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  @media (min-width: 630px) {
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 100px;
+  }
+}
+
+.number-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: blueviolet;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 2px;
+  width: 33px;
+  height: 33px;
+  @media (min-width: 630px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.number-container:hover {
+  background-color: rgb(120, 28, 207);
+}
