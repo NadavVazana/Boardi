@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="collect-balls.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boardie</title>
+    <link
+      rel="shortcut icon"
+      href="../assets/images/gaming-controller-gamepad-joystick-game-console-svgrepo-com.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body onload="onAppLoad(); buildGborad();">
+    <section class="collect-balls">
+      <div class="header">
+        <div class="game-info">Score: <span class="score">0</span></div>
+        <div onclick="returnHome()" class="logo-container">
+          <img src="../assets/images/logo.png" />
+          <h1>oardie</h1>
+        </div>
+        <img onclick="toggleMute()" class="mute-img" src="" />
+      </div>
+      <div class="collect-balls-game">
+        <div class="collect-balls-container"></div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<script src="collect-balls.js"></script>
+<script src="../main.js"></script>
