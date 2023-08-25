@@ -2,8 +2,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   height: calc(100dvh - 51px);
   @media (min-width: 500px) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: calc(100dvh - 71px);
   }
   @media (min-width: 1024px) {
@@ -12,26 +19,85 @@
 }
 
 .collect-balls-container {
-  position: absolute;
   display: grid;
-  /* grid-template-columns: repeat(6, 1fr); */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  position: absolute;
+  top: 14%;
+  @media (hover: hover) and (pointer: fine) {
+    position: auto;
+    top: auto;
+  }
 }
 
 .square {
-  width: 120px;
-  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid black;
+  width: 48px;
+  height: 48px;
+  @media (min-width: 950px) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .collect-balls-container img {
-  width: 90px;
-  height: 90px;
+  width: 35px;
+  @media (min-width: 950px) {
+    width: 50px;
+  }
+  @media (min-width: 1024px) {
+    width: 65px;
+  }
+}
+
+.start-btn,
+.play-again-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.timer {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 23px;
+}
+
+.end-msg {
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: 35px;
+  white-space: nowrap;
+  @media (min-width: 500px) {
+    top: 38%;
+    font-size: 45px;
+  }
+}
+
+.arrows-container {
+  position: absolute;
+  top: 74%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (hover: hover) and (pointer: fine) {
+    display: none;
+  }
+}
+
+.arrows-container img {
+  margin-inline: 50px;
+  width: 47px;
 }

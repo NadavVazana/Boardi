@@ -23,7 +23,36 @@
         <img onclick="toggleMute()" class="mute-img" src="" />
       </div>
       <div class="collect-balls-game">
+        <div class="black-screen">
+          <p hidden class="end-msg">
+            Best score: <span class="best-score"></span>
+          </p>
+          <button onclick="startGame()" class="start-btn main-btn">
+            Start!
+          </button>
+          <button hidden onclick="startGame()" class="play-again-btn main-btn">
+            Play Again!
+          </button>
+        </div>
+        <div class="timer">Timer: <span class="time-count"></span></div>
         <div class="collect-balls-container"></div>
+        <div class="arrows-container">
+          <img onclick="movePlayer('up')" src="../assets/images/arrow-up.svg" />
+          <div class="arrows-sides">
+            <img
+              onclick="movePlayer('left')"
+              src="../assets/images/arrow-left.svg"
+            />
+            <img
+              onclick="movePlayer('right')"
+              src="../assets/images/arrow-right.svg"
+            />
+          </div>
+          <img
+            onclick="movePlayer('down')"
+            src="../assets/images/arrow-down.svg"
+          />
+        </div>
       </div>
     </section>
   </body>
